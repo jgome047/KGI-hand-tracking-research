@@ -19,7 +19,7 @@ with mp_hands.Hands(
         min_detection_confidence=0.5) as hands:
     # Read an image, flip it around y-axis for correct handedness output (see
     # above).
-    image = cv2.imread('Hand_0000002.jpg')  # Insert your Image Here
+    image = cv2.imread('./Hands - 100/Hand_0000002.jpg')  # Insert your Image Here
     # Convert the BGR image to RGB before processing.
     results = hands.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     if not results.multi_hand_landmarks:
@@ -30,7 +30,7 @@ with mp_hands.Hands(
     image_height, image_width, _ = image.shape
     # annotated_image = image.copy()
     for hand_landmarks in results.multi_hand_landmarks:
-        
+
         # thumb calculations
         thumb_tip_x = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP].x * image_width
         thumb_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP].y * image_height
