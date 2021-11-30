@@ -9,10 +9,14 @@ mp_hands = mp.solutions.hands
 
 from matplotlib import pyplot as plt
 
-joint_list = [[8,7,6], [12,11,10], [16,15,14], [20,19,18]]
+
+#define the joints of interest (pretty much all of them)
+joint_list = [[4,3,2], [8,7,6], [12,11,10], [16,15,14], [20,19,18]]
 
 joint_list[3]
 
+
+#function for calculating finger angles (for now, in 2D)
 def draw_finger_angles(image, results, joint_list):
     
     # Loop through hands
@@ -33,6 +37,7 @@ def draw_finger_angles(image, results, joint_list):
                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
     return image
 
+#labelling hands as L and R, angles of each finger, and confidence values
 def get_label(index, hand, results):
     output = None
     for idx, classification in enumerate(results.multi_handedness):
@@ -52,6 +57,7 @@ def get_label(index, hand, results):
             
     return output
 
+#camera capture and drawing of finger segments
 cap = cv2.VideoCapture(0)
 
 with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) as hands: 
@@ -106,6 +112,10 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
 cap.release()
 cv2.destroyAllWindows()
 cv2.waitKey(1)
+
+
+
+
 
 
 
