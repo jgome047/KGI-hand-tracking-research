@@ -24,17 +24,17 @@ def draw_finger_angles(image, results, joint_list):
     for hand in results.multi_hand_landmarks:
         #Loop through joint sets 
         for joint in joint_list:
-            a = np.array([hand.landmark[joint[0]].x, hand.landmark[joint[0]].y], hand.landmark[joint[0]].z) # First coord
-            b = np.array([hand.landmark[joint[1]].x, hand.landmark[joint[1]].y], hand.landmark[joint[1]].z) # Second coord
-            c = np.array([hand.landmark[joint[2]].x, hand.landmark[joint[2]].y], hand.landmark[joint[2]].z) # Third coord
+            a = np.array([hand.landmark[joint[0]].x, hand.landmark[joint[0]].y, hand.landmark[joint[0]].z]) # First coord
+            b = np.array([hand.landmark[joint[1]].x, hand.landmark[joint[1]].y, hand.landmark[joint[1]].z]) # Second coord
+            c = np.array([hand.landmark[joint[2]].x, hand.landmark[joint[2]].y, hand.landmark[joint[2]].z]) # Third coord
             
             #length of finger (might need to add some calcs distance formula sqrt((x2-x1)**2)+(y2-y1)**2))
             
-            len_ab = np.sqrt[(((b[0])-(a[0]))**2)+(((b[1])-(a[1]))**2)]
-            len_bc = np.sqrt[(((c[0])-(b[0]))**2)+(((c[1])-(b[1]))**2)]
+            #len_ab = np.sqrt[(((b[0])-(a[0]))**2)+(((b[1])-(a[1]))**2)]
+            #len_bc = np.sqrt[(((c[0])-(b[0]))**2)+(((c[1])-(b[1]))**2)]
 
-            #len_ab = 5
-            #len_bc = 5
+            len_ab = 2.5
+            len_bc = 2.5
 
             # assign easy to "read" coordinates based on arrays
             xa = a[0]
@@ -67,8 +67,8 @@ def draw_finger_angles(image, results, joint_list):
             if angle > 180.0:
                 angle = 360-angle
                 
-            cv2.putText(image, str(round(angle, 2)), tuple(np.multiply(b, [640, 480]).astype(int)),
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(image, str(round(angle,2)), tuple(np.multiply([b[0],b[1]], 500).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
     return image
 
 #labelling hands as L and R, angles of each finger, and confidence values
