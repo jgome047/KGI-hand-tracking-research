@@ -23,9 +23,9 @@ def draw_finger_angles(image, results, joint_list):
     for hand in results.multi_hand_landmarks:
         #Loop through joint sets 
         for joint in joint_list:
-            a = np.array([hand.landmark[joint[0]].x, hand.landmark[joint[0]].y]) # First coord
-            b = np.array([hand.landmark[joint[1]].x, hand.landmark[joint[1]].y]) # Second coord
-            c = np.array([hand.landmark[joint[2]].x, hand.landmark[joint[2]].y]) # Third coord
+            a = np.array([hand.landmark[joint[0]].x, hand.landmark[joint[0]].y, hand.landmark[joint[0]].z]) # First coord
+            b = np.array([hand.landmark[joint[1]].x, hand.landmark[joint[1]].y, hand.landmark[joint[1]].z]) # Second coord
+            c = np.array([hand.landmark[joint[2]].x, hand.landmark[joint[2]].y, hand.landmark[joint[2]].z]) # Third coord
             
             radians = np.arctan2(np.linalg.norm(np.cross(a-b, c-b)), np.dot(a-b, c-b))
             angle = np.abs(radians*180.0/np.pi)
