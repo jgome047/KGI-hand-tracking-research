@@ -33,7 +33,7 @@ def draw_finger_angles(image, results, joint_list):
             if angle > 180.0:
                 angle = 360 - angle
 
-            cv2.putText(image, str(round(angle,2)), tuple(np.multiply([b[0],b[1]], 720).astype(int)),
+            cv2.putText(image, str(round(angle,2)), tuple(np.multiply([b[0],b[1]], [640, 480]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
 
     return image
